@@ -89,7 +89,7 @@ window.STARPAW_CHARACTERS_DATA = [
     name: "Jayfeather",
     tagline: "MEDICINE CAT",
     quote: "“That’s an incredibly overengineered solution.”",
-    labels: [],
+    labels: ["ROLEPLAY"],
     sections: [
       {
         type: "stats",
@@ -146,7 +146,7 @@ window.STARPAW_CHARACTERS_DATA = [
     name: "Steelpaw",
     tagline: "EXPEDITION TEAM",
     quote: "“If he’s holding the Super Soaker, it’s either another emergency or another expedition.”",
-    labels: [],
+    labels: ["ROLEPLAY"],
     sections: [
       {
         type: "stats",
@@ -182,7 +182,7 @@ window.STARPAW_CHARACTERS_DATA = [
     name: "Amberpaw",
     tagline: "EXPEDITION TEAM",
     quote: "“Wait… Croatia?”",
-    labels: [],
+    labels: ["ROLEPLAY"],
     sections: [
       {
         type: "stats",
@@ -206,7 +206,7 @@ window.STARPAW_CHARACTERS_DATA = [
     name: "Nightpaw",
     tagline: "COMBAT SPECIALIST",
     quote: "“Speed and precision, occasionally too much of both.”",
-    labels: [],
+    labels: ["ROLEPLAY"],
     sections: [
       {
         type: "stats",
@@ -239,7 +239,7 @@ window.STARPAW_CHARACTERS_DATA = [
     name: "Ashpaw",
     tagline: "INTELLIGENCE SPECIALIST",
     quote: "“Surveillance only works while the Clan trusts the cat doing it.”",
-    labels: [],
+    labels: ["ROLEPLAY"],
     sections: [
       {
         type: "stats",
@@ -272,7 +272,7 @@ window.STARPAW_CHARACTERS_DATA = [
     name: "Rustpaw",
     tagline: "MOBILITY SPECIALIST",
     quote: "“Mobility doesn’t replace planning.”",
-    labels: [],
+    labels: ["ROLEPLAY"],
     sections: [
       {
         type: "stats",
@@ -304,7 +304,7 @@ window.STARPAW_CHARACTERS_DATA = [
     name: "Millie",
     tagline: "STAND USER",
     quote: "“Speed and perception, hard to track.”",
-    labels: [],
+    labels: ["ROLEPLAY"],
     sections: [
       {
         type: "stats",
@@ -336,7 +336,7 @@ window.STARPAW_CHARACTERS_DATA = [
     name: "Ivypool",
     tagline: "HAZMAT SPECIALIST",
     quote: "“Personal resistance doesn’t make the plants safe for anyone else.”",
-    labels: [],
+    labels: ["ROLEPLAY"],
     sections: [
       {
         type: "stats",
@@ -368,7 +368,7 @@ window.STARPAW_CHARACTERS_DATA = [
     name: "Berrynose",
     tagline: "HEAVY SPECIALIST · COMEDY TARGET",
     quote: "“His abilities are useful. His proximity to my repaired property is not.”",
-    labels: [],
+    labels: ["ROLEPLAY"],
     sections: [
       {
         type: "stats",

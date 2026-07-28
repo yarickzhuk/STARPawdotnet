@@ -82,10 +82,20 @@
     })
     .join("\n");
 
-  mount.innerHTML =
-    '<a class="btn btn-white" href="/files.html">← BACK TO THE STARPAW FILES</a>' +
-    '<div class="tag-row" style="margin-top:28px;">' + labels + "</div>" +
-    "<h1 class=\"hero-title\" style=\"margin-top:14px;\">" + escapeHtml(character.name) + "</h1>" +
-    '<p class="lead" style="font-style:italic;">' + escapeHtml(character.quote) + "</p>" +
-    sections;
+  function buildContentHtml() {
+    return (
+      '<a class="btn btn-white" href="/files.html">← BACK TO THE STARPAW FILES</a>' +
+      '<div class="tag-row" style="margin-top:28px;">' + labels + "</div>" +
+      "<h1 class=\"hero-title\" style=\"margin-top:14px;\">" + escapeHtml(character.name) + "</h1>" +
+      '<p class="lead" style="font-style:italic;">' + escapeHtml(character.quote) + "</p>" +
+      sections
+    );
+  }
+
+  var isClassified = (character.labels || []).indexOf("CLASSIFIED") !== -1;
+  if (isClassified && window.STARPAW_SPOILERS) {
+    window.STARPAW_SPOILERS.guard(mount, buildContentHtml);
+  } else {
+    mount.innerHTML = buildContentHtml();
+  }
 })();

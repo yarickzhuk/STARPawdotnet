@@ -53,7 +53,7 @@ window.STARPAW_HERBS_DATA = [
   {
     slug: "marigold",
     name: "Marigold",
-    labels: [],
+    labels: ["ITEM DATABASE"],
     sections: [
       {
         type: "stats",
@@ -90,7 +90,7 @@ window.STARPAW_HERBS_DATA = [
   {
     slug: "juniper-berries",
     name: "Juniper Berries",
-    labels: [],
+    labels: ["ITEM DATABASE"],
     sections: [
       {
         type: "stats",
@@ -127,7 +127,7 @@ window.STARPAW_HERBS_DATA = [
   {
     slug: "cobwebs",
     name: "Cobwebs",
-    labels: [],
+    labels: ["ITEM DATABASE"],
     sections: [
       {
         type: "stats",
@@ -166,7 +166,7 @@ window.STARPAW_HERBS_DATA = [
   {
     slug: "icelandic-moss",
     name: "Prepared Icelandic Moss",
-    labels: [],
+    labels: ["ITEM DATABASE"],
     sections: [
       {
         type: "stats",
