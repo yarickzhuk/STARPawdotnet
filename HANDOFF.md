@@ -68,16 +68,30 @@ Issues тут не працюють — ДИЗАЙН їх не бачить.
 Якщо треба обговорити рішення в чаті до того, як воно стало кодом — людина
 кидає в ЧАТ скріншот канвасу. Це єдиний випадок, коли копіпаст неминучий.
 
-## 4. ДИЗАЙН → КОД — кнопка
+## 4. ДИЗАЙН → КОД — через завантажений бандл, НЕ через кнопку хендофу
 
-На канвасі: `Export → Handoff to Claude Code → Send to Claude Code Web`.
-У КОДі з'являється сесія з макетом. Людина пише:
+**Кнопкою «Export → Handoff to Claude Code → Send to Claude Code Web» не
+користуватись.** У ній відома дірка: сесія КОДу, яку вона відкриває, не
+підключена до жодного репозиторію — вибору репо там немає. Без підключення
+немає конекторів і немає деплою. Це причина, з якої той шлях відчувається
+як «обрізаний Клод Код» — так і є, сесія без репо не вміє того, що вміє
+звичайна.
 
-> Apply this to the repo. Keep the existing routes and page filenames.
-> Write the design system into DESIGN.md and the styles into css/.
-> Do not add build tools, frameworks or dependencies.
+Робочий шлях:
 
-Копіпасту немає.
+1. На канвасі: `Export → Download zip` (саме zip, не «Send to Claude Code
+   Web»).
+2. Відкрити claude.ai/code **напряму, з нуля**, і обрати репозиторій
+   STARPawdotnet зі списку. Так сесія одразу підключена до репо, з усіма
+   конекторами й можливістю задеплоїти через PR.
+3. Прикріпити завантажений zip до повідомлення і написати:
+
+> Apply this design bundle to the repo. Keep the existing routes and page
+> filenames. Write the design system into DESIGN.md and the styles into
+> css/. Do not add build tools, frameworks or dependencies.
+
+Копіпаст: один файл і один абзац тексту. Довше на один крок, ніж кнопка,
+але сесія повноцінна від початку до кінця.
 
 ## 5. КОД → ЧАТ — через той самий issue
 
