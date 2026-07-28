@@ -57,6 +57,7 @@
   --t-stagger: 60ms;
   --t-shimmer: 4s;
   --t-seal: 420ms;
+  --t-transition: 800ms;
 }
 
 * { box-sizing: border-box; }
@@ -651,4 +652,80 @@ body[data-accent]:not([data-accent="home"]) .section-hero-lg {
 }
 .shimmer {
   animation: glass-shimmer var(--t-shimmer) ease-in-out infinite;
+}
+
+/* ---------- page-to-page "break and reform" transitions (D-01 follow-up) ----------
+   Cross-document View Transitions API. Needs no router, no build step, no JS:
+   unsupported browsers (Firefox, older Safari) simply skip the whole block and
+   fall back to a plain instant navigation — nothing here has a script fallback
+   because nothing here needs one. The destination page's stylesheet governs the
+   full old→new animation for a cross-document navigation, so the section
+   identity comes from the arriving page's body[data-accent] (set synchronously
+   by js/layout.js before first paint, see wireAccent()), not the page left
+   behind. Wrapping the whole @view-transition rule in the reduced-motion query
+   means it's not just visually inert but never engaged at all for that
+   preference, matching every other motion rule above. */
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: var(--t-transition);
+    animation-timing-function: var(--ease-glass);
+  }
+
+  /* Roasts — screen cracks with red lines and reassembles */
+  @keyframes vt-roasts-old {
+    0% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); filter: saturate(1) drop-shadow(0 0 0 transparent); opacity: 1; }
+    30% { clip-path: polygon(0 0, 53% 0, 59% 21%, 46% 37%, 64% 54%, 51% 100%, 0 100%); filter: saturate(1.5) drop-shadow(0 0 18px var(--roasts)); opacity: 1; }
+    100% { clip-path: polygon(0 0, 41% 0, 71% 14%, 29% 41%, 81% 61%, 19% 100%, 0 100%); filter: saturate(2) drop-shadow(0 0 46px var(--roasts)); opacity: 0; transform: scale(0.95); }
+  }
+  @keyframes vt-roasts-new {
+    0% { clip-path: polygon(0 0, 41% 0, 71% 14%, 29% 41%, 81% 61%, 19% 100%, 0 100%); filter: saturate(2) drop-shadow(0 0 46px var(--roasts)); opacity: 0; transform: scale(1.05); }
+    45% { clip-path: polygon(0 0, 53% 0, 59% 21%, 46% 37%, 64% 54%, 51% 100%, 0 100%); filter: saturate(1.5) drop-shadow(0 0 18px var(--roasts)); opacity: 1; transform: scale(1.01); }
+    100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); filter: saturate(1) drop-shadow(0 0 0 transparent); opacity: 1; transform: scale(1); }
+  }
+  :root:has(body[data-accent="roasts"])::view-transition-old(root) { animation-name: vt-roasts-old; }
+  :root:has(body[data-accent="roasts"])::view-transition-new(root) { animation-name: vt-roasts-new; }
+
+  /* Files — glass segments tile in like a load-in */
+  @keyframes vt-files-old {
+    0% { mask-image: linear-gradient(115deg, #000 0 100%); filter: saturate(1) brightness(1); opacity: 1; }
+    100% { mask-image: repeating-linear-gradient(115deg, #000 0 6%, transparent 6% 9%); filter: saturate(0.5) brightness(1.3); opacity: 0; transform: scale(0.98); }
+  }
+  @keyframes vt-files-new {
+    0% { mask-image: repeating-linear-gradient(115deg, transparent 0 100%); filter: saturate(0.5) brightness(1.3); opacity: 0; transform: scale(0.98); }
+    55% { mask-image: repeating-linear-gradient(115deg, #000 0 45%, transparent 45% 50%); filter: saturate(0.8) brightness(1.15); opacity: 0.9; transform: scale(0.99); }
+    100% { mask-image: linear-gradient(115deg, #000 0 100%); filter: saturate(1) brightness(1); opacity: 1; transform: scale(1); }
+  }
+  :root:has(body[data-accent="files"])::view-transition-old(root) { animation-name: vt-files-old; animation-timing-function: steps(6, jump-end); }
+  :root:has(body[data-accent="files"])::view-transition-new(root) { animation-name: vt-files-new; animation-timing-function: steps(6, jump-end); }
+
+  /* Atlas — window folds shut like shutters */
+  @keyframes vt-atlas-old {
+    0% { transform: perspective(1400px) rotateY(0deg); filter: brightness(1); opacity: 1; }
+    100% { transform: perspective(1400px) rotateY(-92deg); filter: brightness(0.35); opacity: 0; }
+  }
+  @keyframes vt-atlas-new {
+    0% { transform: perspective(1400px) rotateY(92deg); filter: brightness(0.35); opacity: 0; }
+    100% { transform: perspective(1400px) rotateY(0deg); filter: brightness(1); opacity: 1; }
+  }
+  :root:has(body[data-accent="atlas"])::view-transition-old(root) { animation-name: vt-atlas-old; transform-origin: left center; }
+  :root:has(body[data-accent="atlas"])::view-transition-new(root) { animation-name: vt-atlas-new; transform-origin: left center; }
+
+  /* Herbs — color bleeds like paint in water and resettles */
+  @keyframes vt-herbs-old {
+    0% { filter: blur(0) saturate(1) hue-rotate(0deg); opacity: 1; transform: scale(1); }
+    100% { filter: blur(16px) saturate(2.4) hue-rotate(22deg); opacity: 0; transform: scale(1.06); }
+  }
+  @keyframes vt-herbs-new {
+    0% { filter: blur(16px) saturate(2.4) hue-rotate(-22deg); opacity: 0; transform: scale(0.94); }
+    100% { filter: blur(0) saturate(1) hue-rotate(0deg); opacity: 1; transform: scale(1); }
+  }
+  :root:has(body[data-accent="herbs"])::view-transition-old(root) { animation-name: vt-herbs-old; }
+  :root:has(body[data-accent="herbs"])::view-transition-new(root) { animation-name: vt-herbs-new; }
 }
