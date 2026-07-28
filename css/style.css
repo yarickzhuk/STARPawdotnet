@@ -590,6 +590,54 @@ body[data-accent]:not([data-accent="home"]) .section-hero-lg {
 }
 .portrait-frame svg { position: relative; z-index: 1; width: 72%; height: 72%; }
 
+/* ---------- photo frame (territory report raster art) ---------- */
+
+.photo-frame {
+  position: relative;
+  border: 2px solid var(--lead);
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--panel-2);
+  box-shadow: inset 0 1px 0 var(--leadhi);
+}
+.photo-frame img {
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+.photo-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: repeating-linear-gradient(0deg, rgba(5, 5, 6, 0.35) 0 2px, transparent 2px 90px),
+    repeating-linear-gradient(90deg, rgba(5, 5, 6, 0.35) 0 2px, transparent 2px 90px);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.photo-frame figcaption {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 8px 12px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--parchdim);
+  background: linear-gradient(0deg, rgba(5, 5, 6, 0.78), transparent);
+}
+.photo-frame--hero { aspect-ratio: 21 / 9; margin: 28px 0; }
+.photo-frame--sector { aspect-ratio: 3 / 2; margin: 14px 0 0; }
+.photo-frame--sm { aspect-ratio: 4 / 3; }
+@media (max-width: 640px) {
+  .photo-frame--hero { aspect-ratio: 4 / 3; }
+}
+
 .character-layout {
   display: grid;
   grid-template-columns: minmax(240px, 420px) 1fr;
