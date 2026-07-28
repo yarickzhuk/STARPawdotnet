@@ -1,9 +1,11 @@
 # DESIGN.md — STARPaw.net v2, "Vitrage of the Clan"
 
-Approved design system for the second visual version of the site. This file is
-read automatically by Claude Design on re-import, and by Claude Code at the
-start of every session. It does not change any route, filename, or piece of
-site text — only the visual layer, per `HANDOFF.md` task D-01.
+Approved design system for the second visual version of the site. Claude Code
+reads this file at the start of every session; it is the single source of
+truth for how the site looks. Claude Design is not part of this project — any
+change to the visual layer is made here and in `css/` together, in one pull
+request. It does not change any route, filename, or piece of site text — only
+the visual layer.
 
 ## Direction
 
@@ -104,8 +106,8 @@ already used (`CLAUDE.md` hard rule: no external font services).
 
 ## Portraits
 
-The brief calls for full-height, icon-flat, frontal stained-glass portraits
-per character, with bespoke iconography for four of them:
+Full-height, icon-flat, frontal stained-glass portraits per character, with
+bespoke iconography for four of them:
 
 - **Jayfeather** — looks past the viewer (blind), near-monochrome slate.
 - **Starpaw** — the glass behind him has already cracked/come apart.
@@ -114,14 +116,13 @@ per character, with bespoke iconography for four of them:
 
 **Scope decision made in this pass:** this implementation ships those four
 as hand-built flat SVG stained-glass icons (`js/portraits.js`), not
-photographic/AI-generated raster art — this session has no image-generation
-tool available, and flat vector shapes with thick black leading are, if
-anything, closer to the actual stained-glass reference than a photoreal
-render would be. **The question of where final raster portraits come from
-(commission / AI / collage) is still open and undecided** — per
-`HANDOFF.md`, that's a human decision, not made here. The SVG icons are
-production-safe placeholders: swapping in a real raster portrait later means
-replacing the contents of `.portrait-frame`, nothing structural.
+photographic/AI-generated raster art — flat vector shapes with thick black
+leading are, if anything, closer to the actual stained-glass reference than
+a photoreal render would be. **The question of where final raster portraits
+come from (commission / AI / collage) is still open and undecided** — that
+is a human decision, not made here. The SVG icons are production-safe
+placeholders: swapping in a real raster portrait later means replacing the
+contents of `.portrait-frame`, nothing structural.
 
 Every other roster character (Amberpaw, Nightpaw, Ashpaw, Rustpaw, Ivypool,
 Berrynose) gets a generic frontal roundel-in-diamond placeholder tinted with
@@ -138,11 +139,11 @@ gracefully" rule below.
 | Page transition | ~800ms `--ease-glass` — per-section cross-document break/reform, see below |
 | Reduced motion | all of the above → instant/no-op, via `prefers-reduced-motion: reduce` |
 
-**Page-to-page transitions:** the brief describes a bespoke "break and
-reform" animation per section (Roasts cracks and reassembles, Files
-tiles in, Atlas folds like shutters, Herbs bleeds and resettles). Implemented
-via the cross-document View Transitions API (`@view-transition { navigation:
-auto; }` in `css/style.css`) — no router, no build step, no JS required.
+**Page-to-page transitions:** each section gets a bespoke "break and reform"
+animation (Roasts cracks and reassembles, Files tiles in, Atlas folds like
+shutters, Herbs bleeds and resettles). Implemented via the cross-document
+View Transitions API (`@view-transition { navigation: auto; }` in
+`css/style.css`) — no router, no build step, no JS required.
 Each section gets a named `::view-transition-old(root)` /
 `::view-transition-new(root)` pair keyed off the *arriving* page's
 `body[data-accent]` (that's the document whose stylesheet governs a
