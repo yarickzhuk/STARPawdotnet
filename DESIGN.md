@@ -135,18 +135,34 @@ gracefully" rule below.
 | Shard assembly | ~900ms per element, staggered 60ms — cards/pills compose in on scroll |
 | Cursor shimmer | 4s ease-in-out loop, ±2% opacity — never a full flash |
 | Spoiler glaze / seal | 420ms ease — lead frame closes/opens over text |
+| Page transition | ~800ms `--ease-glass` — per-section cross-document break/reform, see below |
 | Reduced motion | all of the above → instant/no-op, via `prefers-reduced-motion: reduce` |
 
 **Page-to-page transitions:** the brief describes a bespoke "break and
 reform" animation per section (Roasts cracks and reassembles, Files
-tiles in, Atlas folds like shutters, Herbs bleeds and resettles). This is a
-real multi-page static site (no client-side router, no build step allowed),
-so a true cross-document transition would mean either a JS framework or
-relying on the still-inconsistently-supported cross-document View
-Transitions API with no way to test it in this environment. Scoped down,
-deliberately, to the on-load shard-assembly entrance instead, which is
-supported everywhere and needs no navigation intercept. Revisit if the site
-ever gets a JS router.
+tiles in, Atlas folds like shutters, Herbs bleeds and resettles). Implemented
+via the cross-document View Transitions API (`@view-transition { navigation:
+auto; }` in `css/style.css`) — no router, no build step, no JS required.
+Each section gets a named `::view-transition-old(root)` /
+`::view-transition-new(root)` pair keyed off the *arriving* page's
+`body[data-accent]` (that's the document whose stylesheet governs a
+cross-document transition): Roasts fractures the outgoing view along jagged
+`clip-path` cracks with a red `drop-shadow` glow and reverses on the way in;
+Files reveals/hides in a stepped `mask-image` sweep (`steps(6, jump-end)`)
+for a "tiling in" feel; Atlas does a `perspective`/`rotateY` shutter-fold
+hinged on the left edge; Herbs blurs, oversaturates, and hue-shifts outward
+like ink in water before resettling. All four run ~800ms on the existing
+`--ease-glass` curve, a new `--t-transition` token in the 700–900ms band
+next to the other motion tokens. The entire `@view-transition` rule (and
+therefore the whole feature) lives inside
+`@media (prefers-reduced-motion: no-preference)`, so it's never engaged —
+not just visually neutralized — under reduced motion, and browsers without
+cross-document view-transition support (Firefox, older Safari) simply don't
+parse the at-rule and fall back to a plain instant navigation with zero
+visual regression. Not testable in this environment (no way to drive a real
+cross-document navigation across engines here); needs a human check in
+Chrome/Edge (support exists) and Firefox/Safari (confirm graceful
+degradation) before calling it done.
 
 ## Hard limits (carried over from `CLAUDE.md`, unchanged by this pass)
 
