@@ -11,6 +11,7 @@
 <body id="top">
 
 <div id="site-header-mount"></div>
+<script src="/js/random.js"></script>
 <script src="/js/layout.js"></script>
 <script>window.STARPAW_LAYOUT.mount("herbs", "section");</script>
 
@@ -24,18 +25,18 @@
     </div>
     <p class="lead" style="max-width:660px; margin-bottom:32px;">Herbs are displayed as game items with rarity, effects, availability, and trade value. Real plant names may appear, but all stats and mechanics belong to the fictional site system.</p>
 
-    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:36px;">
-      <button type="button" class="filter-pill">ALL ITEMS</button>
-      <button type="button" class="filter-pill">HEALING</button>
-      <button type="button" class="filter-pill">SUPPORT</button>
-      <button type="button" class="filter-pill">MATERIAL</button>
-      <button type="button" class="filter-pill">COMMON</button>
-      <button type="button" class="filter-pill">RARE</button>
-      <button type="button" class="filter-pill">LEGENDARY</button>
+    <div id="herb-filter-pills" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:36px;">
+      <button type="button" class="filter-pill active" data-filter="all items">ALL ITEMS</button>
+      <button type="button" class="filter-pill" data-filter="healing">HEALING</button>
+      <button type="button" class="filter-pill" data-filter="support">SUPPORT</button>
+      <button type="button" class="filter-pill" data-filter="material">MATERIAL</button>
+      <button type="button" class="filter-pill" data-filter="common">COMMON</button>
+      <button type="button" class="filter-pill" data-filter="rare">RARE</button>
+      <button type="button" class="filter-pill" data-filter="legendary">LEGENDARY</button>
     </div>
 
-    <div class="card-grid cols-sm pad-bottom-lg">
-      <a class="card" href="/herb.html?slug=catmint" style="text-decoration:none; color:var(--ink); border-radius:32px; padding:26px;">
+    <div id="herb-grid" class="card-grid cols-sm pad-bottom-lg">
+      <a class="card" href="/herb.html?slug=catmint" data-category="healing legendary" style="text-decoration:none; color:var(--ink); border-radius:32px; padding:26px;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
           <svg width="34" height="34" viewBox="0 0 48 48" fill="none"><path d="M24 6 C36 6 40 20 40 30 C40 38 32 42 24 42 C16 42 8 38 8 30 C8 20 12 6 24 6 Z" stroke="#000000" stroke-width="2.5"/><path d="M24 8 V40" stroke="#000000" stroke-width="2"/></svg>
           <span class="tag-pill" style="background:var(--lilac);">LEGENDARY</span>
@@ -45,7 +46,7 @@
         <div class="stat-line" style="background:var(--bg); border-radius:12px; padding:10px; white-space:pre-line; font-size:11px;">+80 outbreak stability
 +300% diplomatic attention</div>
       </a>
-      <a class="card" href="/herb.html?slug=marigold" style="text-decoration:none; color:var(--ink); border-radius:32px; padding:26px;">
+      <a class="card" href="/herb.html?slug=marigold" data-category="healing common" style="text-decoration:none; color:var(--ink); border-radius:32px; padding:26px;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
           <svg width="34" height="34" viewBox="0 0 48 48" fill="none"><path d="M24 6 C36 6 40 20 40 30 C40 38 32 42 24 42 C16 42 8 38 8 30 C8 20 12 6 24 6 Z" stroke="#000000" stroke-width="2.5"/><path d="M24 8 V40" stroke="#000000" stroke-width="2"/></svg>
           <span class="tag-pill" style="background:var(--mint);">COMMON</span>
@@ -55,7 +56,7 @@
         <div class="stat-line" style="background:var(--bg); border-radius:12px; padding:10px; white-space:pre-line; font-size:11px;">+15 wound-care support
 +5 apprentice confidence</div>
       </a>
-      <a class="card" href="/herb.html?slug=juniper-berries" style="text-decoration:none; color:var(--ink); border-radius:32px; padding:26px;">
+      <a class="card" href="/herb.html?slug=juniper-berries" data-category="support" style="text-decoration:none; color:var(--ink); border-radius:32px; padding:26px;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
           <svg width="34" height="34" viewBox="0 0 48 48" fill="none"><path d="M24 6 C36 6 40 20 40 30 C40 38 32 42 24 42 C16 42 8 38 8 30 C8 20 12 6 24 6 Z" stroke="#000000" stroke-width="2.5"/><path d="M24 8 V40" stroke="#000000" stroke-width="2"/></svg>
           <span class="tag-pill" style="background:var(--sun);">UNCOMMON</span>
@@ -65,7 +66,7 @@
         <div class="stat-line" style="background:var(--bg); border-radius:12px; padding:10px; white-space:pre-line; font-size:11px;">+10 breathing support
 +20 arguments about ownership</div>
       </a>
-      <a class="card" href="/herb.html?slug=cobwebs" style="text-decoration:none; color:var(--ink); border-radius:32px; padding:26px;">
+      <a class="card" href="/herb.html?slug=cobwebs" data-category="material common" style="text-decoration:none; color:var(--ink); border-radius:32px; padding:26px;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
           <svg width="34" height="34" viewBox="0 0 48 48" fill="none"><path d="M24 6 C36 6 40 20 40 30 C40 38 32 42 24 42 C16 42 8 38 8 30 C8 20 12 6 24 6 Z" stroke="#000000" stroke-width="2.5"/><path d="M24 8 V40" stroke="#000000" stroke-width="2"/></svg>
           <span class="tag-pill" style="background:var(--mint);">COMMON</span>
@@ -75,7 +76,7 @@
         <div class="stat-line" style="background:var(--bg); border-radius:12px; padding:10px; white-space:pre-line; font-size:11px;">+20 wound stability
 +30 irritation if spider present</div>
       </a>
-      <a class="card" href="/herb.html?slug=icelandic-moss" style="text-decoration:none; color:var(--ink); border-radius:32px; padding:26px;">
+      <a class="card" href="/herb.html?slug=icelandic-moss" data-category="support rare" style="text-decoration:none; color:var(--ink); border-radius:32px; padding:26px;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
           <svg width="34" height="34" viewBox="0 0 48 48" fill="none"><path d="M24 6 C36 6 40 20 40 30 C40 38 32 42 24 42 C16 42 8 38 8 30 C8 20 12 6 24 6 Z" stroke="#000000" stroke-width="2.5"/><path d="M24 8 V40" stroke="#000000" stroke-width="2"/></svg>
           <span class="tag-pill" style="background:var(--lilac);">RARE</span>
@@ -90,5 +91,7 @@
 </main>
 
 <div id="site-footer-mount"></div>
+
+<script src="/js/herb-filters.js"></script>
 </body>
 </html>
