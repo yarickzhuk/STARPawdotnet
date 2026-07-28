@@ -11,6 +11,7 @@
 <body id="top" style="overflow-x:hidden;">
 
 <div id="site-header-mount"></div>
+<script src="/js/random.js"></script>
 <script src="/js/layout.js"></script>
 <script>window.STARPAW_LAYOUT.mount(null, "home");</script>
 
@@ -159,7 +160,7 @@
 <script src="/js/home.js"></script>
 <script>
   document.getElementById("hero-random-btn").addEventListener("click", function () {
-    window.location.href = "/roasts.html?random=1";
+    window.STARPAW_RANDOM.goToRandom();
   });
 </script>
 </body>

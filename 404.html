@@ -23,8 +23,14 @@
 </div>
 <div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:center;">
   <a href="/index.html" class="btn btn-ember" style="font-size:15px; padding:13px 24px;">RETURN HOME</a>
-  <a href="/roasts.html" class="btn btn-white" style="font-size:15px; padding:13px 24px;">OPEN A RANDOM FILE</a>
+  <button type="button" id="random-file-btn" class="btn btn-white" style="font-size:15px; padding:13px 24px;">OPEN A RANDOM FILE</button>
 </div>
 
+<script src="/js/random.js"></script>
+<script>
+  document.getElementById("random-file-btn").addEventListener("click", function () {
+    window.STARPAW_RANDOM.goToRandom();
+  });
+</script>
 </body>
 </html>
