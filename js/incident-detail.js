@@ -14,12 +14,17 @@
     });
   }
 
+  function refreshLayout() {
+    if (window.STARPAW_LAYOUT && window.STARPAW_LAYOUT.refresh) window.STARPAW_LAYOUT.refresh();
+  }
+
   if (!incident) {
     mount.innerHTML =
       '<div class="eyebrow">FILE NOT FOUND</div>' +
       '<h1 class="hero-title">THIS REPORT DOESN’T EXIST</h1>' +
       '<p class="lead">Starpaw probably moved it. <a href="/files.html">Back to the Starpaw Files.</a></p>';
     document.title = "Incident not found — STARPaw.net";
+    refreshLayout();
     return;
   }
 
@@ -101,4 +106,6 @@
   } else {
     mount.innerHTML = buildContentHtml();
   }
+
+  refreshLayout();
 })();

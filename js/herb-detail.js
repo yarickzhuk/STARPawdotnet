@@ -14,12 +14,17 @@
     });
   }
 
+  function refreshLayout() {
+    if (window.STARPAW_LAYOUT && window.STARPAW_LAYOUT.refresh) window.STARPAW_LAYOUT.refresh();
+  }
+
   if (!herb) {
     mount.innerHTML =
       '<div class="eyebrow">ITEM NOT FOUND</div>' +
       '<h1 class="hero-title">THIS HERB ISN’T STOCKED</h1>' +
       '<p class="lead">Jayfeather doesn’t know either. <a href="/herbs.html">Back to the Herb Guide.</a></p>';
     document.title = "Herb not found — STARPaw.net";
+    refreshLayout();
     return;
   }
 
@@ -95,4 +100,6 @@
     '<div class="tag-row" style="margin-top:28px;">' + labels + "</div>" +
     "<h1 class=\"hero-title\" style=\"margin-top:14px;\">" + escapeHtml(herb.name) + "</h1>" +
     sections;
+
+  refreshLayout();
 })();

@@ -82,7 +82,12 @@
     })
     .join("\n");
 
-  function buildContentHtml() {
+  function renderPortrait() {
+    var svg = window.STARPAW_PORTRAITS ? window.STARPAW_PORTRAITS.render(character.slug, character.name) : "";
+    return '<div class="portrait-frame portrait-' + escapeHtml(character.slug) + '">' + svg + "</div>";
+  }
+
+  function buildBodyHtml() {
     return (
       '<a class="btn btn-white" href="/files.html">← BACK TO THE STARPAW FILES</a>' +
       '<div class="tag-row" style="margin-top:28px;">' + labels + "</div>" +
@@ -92,10 +97,20 @@
     );
   }
 
+  function buildContentHtml() {
+    return '<div class="character-layout">' + renderPortrait() + '<div class="character-body">' + buildBodyHtml() + "</div></div>";
+  }
+
   var isClassified = (character.labels || []).indexOf("CLASSIFIED") !== -1;
   if (isClassified && window.STARPAW_SPOILERS) {
-    window.STARPAW_SPOILERS.guard(mount, buildContentHtml);
+    // The portrait itself is not a spoiler (it's a picture, not lore) — show it
+    // immediately, and let the seal cover only the dossier text beside it.
+    mount.innerHTML = '<div class="character-layout">' + renderPortrait() + '<div class="character-body" id="character-body-mount"></div></div>';
+    var bodyMount = document.getElementById("character-body-mount");
+    window.STARPAW_SPOILERS.guard(bodyMount, buildBodyHtml);
   } else {
     mount.innerHTML = buildContentHtml();
   }
+
+  if (window.STARPAW_LAYOUT && window.STARPAW_LAYOUT.refresh) window.STARPAW_LAYOUT.refresh();
 })();

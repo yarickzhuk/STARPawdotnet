@@ -14,12 +14,17 @@
     });
   }
 
+  function refreshLayout() {
+    if (window.STARPAW_LAYOUT && window.STARPAW_LAYOUT.refresh) window.STARPAW_LAYOUT.refresh();
+  }
+
   if (!roast) {
     mount.innerHTML =
       '<div class="eyebrow">ROAST NOT FOUND</div>' +
       '<h1 class="hero-title">THIS FILE DOESN’T EXIST</h1>' +
       '<p class="lead">Starpaw probably moved it. <a href="/roasts.html">Back to the Roast Archive.</a></p>';
     document.title = "Roast not found — STARPaw.net";
+    refreshLayout();
     return;
   }
 
@@ -156,4 +161,6 @@
     "<h1 class=\"hero-title\" style=\"margin-top:14px;\">" + escapeHtml(roast.title) + "</h1>" +
     (roast.subheading ? '<p class="lead">' + escapeHtml(roast.subheading) + "</p>" : "") +
     sections;
+
+  refreshLayout();
 })();
