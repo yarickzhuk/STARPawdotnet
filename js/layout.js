@@ -36,8 +36,8 @@
       '<div class="footer-links">' +
       '<a href="/about.html">About</a>' +
       '<a href="#">Content Labels</a>' +
-      '<a href="#">Accessibility</a>' +
-      '<a href="#">Credits</a>' +
+      '<a href="/accessibility.html">Accessibility</a>' +
+      '<a href="/credits.html">Credits</a>' +
       '<a href="#top">Back to Top</a>' +
       "</div></div></footer>",
     section:
